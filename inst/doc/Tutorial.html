@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="author" content="dmpe @ github" />
+
+<meta name="date" content="2015-07-17" />
+
+<title>Tutorial for WufooR</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<link href="data:text/css,body%20%7B%0A%20%20background%2Dcolor%3A%20%23fff%3B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20max%2Dwidth%3A%20700px%3B%0A%20%20overflow%3A%20visible%3B%0A%20%20padding%2Dleft%3A%202em%3B%0A%20%20padding%2Dright%3A%202em%3B%0A%20%20font%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0A%20%20font%2Dsize%3A%2014px%3B%0A%20%20line%2Dheight%3A%201%2E35%3B%0A%7D%0A%0A%23header%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0A%0A%23TOC%20%7B%0A%20%20clear%3A%20both%3B%0A%20%20margin%3A%200%200%2010px%2010px%3B%0A%20%20padding%3A%204px%3B%0A%20%20width%3A%20400px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20border%2Dradius%3A%205px%3B%0A%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20font%2Dsize%3A%2013px%3B%0A%20%20line%2Dheight%3A%201%2E3%3B%0A%7D%0A%20%20%23TOC%20%2Etoctitle%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%20%20font%2Dsize%3A%2015px%3B%0A%20%20%20%20margin%2Dleft%3A%205px%3B%0A%20%20%7D%0A%0A%20%20%23TOC%20ul%20%7B%0A%20%20%20%20padding%2Dleft%3A%2040px%3B%0A%20%20%20%20margin%2Dleft%3A%20%2D1%2E5em%3B%0A%20%20%20%20margin%2Dtop%3A%205px%3B%0A%20%20%20%20margin%2Dbottom%3A%205px%3B%0A%20%20%7D%0A%20%20%23TOC%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dleft%3A%20%2D2em%3B%0A%20%20%7D%0A%20%20%23TOC%20li%20%7B%0A%20%20%20%20line%2Dheight%3A%2016px%3B%0A%20%20%7D%0A%0Atable%20%7B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dcolor%3A%20%23DDDDDD%3B%0A%20%20border%2Dstyle%3A%20outset%3B%0A%20%20border%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0A%20%20border%2Dwidth%3A%202px%3B%0A%20%20padding%3A%205px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%20%20line%2Dheight%3A%2018px%3B%0A%20%20padding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0A%20%20border%2Dleft%2Dstyle%3A%20none%3B%0A%20%20border%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Ap%20%7B%0A%20%20margin%3A%200%2E5em%200%3B%0A%7D%0A%0Ablockquote%20%7B%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20padding%3A%200%2E25em%200%2E75em%3B%0A%7D%0A%0Ahr%20%7B%0A%20%20border%2Dstyle%3A%20solid%3B%0A%20%20border%3A%20none%3B%0A%20%20border%2Dtop%3A%201px%20solid%20%23777%3B%0A%20%20margin%3A%2028px%200%3B%0A%7D%0A%0Adl%20%7B%0A%20%20margin%2Dleft%3A%200%3B%0A%7D%0A%20%20dl%20dd%20%7B%0A%20%20%20%20margin%2Dbottom%3A%2013px%3B%0A%20%20%20%20margin%2Dleft%3A%2013px%3B%0A%20%20%7D%0A%20%20dl%20dt%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%7D%0A%0Aul%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%7D%0A%20%20ul%20li%20%7B%0A%20%20%20%20list%2Dstyle%3A%20circle%20outside%3B%0A%20%20%7D%0A%20%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dbottom%3A%200%3B%0A%20%20%7D%0A%0Apre%2C%20code%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20color%3A%20%23333%3B%0A%7D%0Apre%20%7B%0A%20%20white%2Dspace%3A%20pre%2Dwrap%3B%20%20%20%20%2F%2A%20Wrap%20long%20lines%20%2A%2F%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20margin%3A%205px%200px%2010px%200px%3B%0A%20%20padding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Acode%20%7B%0A%20%20font%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0A%20%20font%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0A%20%20padding%3A%202px%200px%3B%0A%7D%0A%0Adiv%2Efigure%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0A%20%20background%2Dcolor%3A%20%23FFFFFF%3B%0A%20%20padding%3A%202px%3B%0A%20%20border%3A%201px%20solid%20%23DDDDDD%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20margin%3A%200%205px%3B%0A%7D%0A%0Ah1%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%20%20font%2Dsize%3A%2035px%3B%0A%20%20line%2Dheight%3A%2040px%3B%0A%7D%0A%0Ah2%20%7B%0A%20%20border%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20padding%2Dbottom%3A%202px%3B%0A%20%20font%2Dsize%3A%20145%25%3B%0A%7D%0A%0Ah3%20%7B%0A%20%20border%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20font%2Dsize%3A%20120%25%3B%0A%7D%0A%0Ah4%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0A%20%20margin%2Dleft%3A%208px%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Ah5%2C%20h6%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23ccc%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Aa%20%7B%0A%20%20color%3A%20%230033dd%3B%0A%20%20text%2Ddecoration%3A%20none%3B%0A%7D%0A%20%20a%3Ahover%20%7B%0A%20%20%20%20color%3A%20%236666ff%3B%20%7D%0A%20%20a%3Avisited%20%7B%0A%20%20%20%20color%3A%20%23800080%3B%20%7D%0A%20%20a%3Avisited%3Ahover%20%7B%0A%20%20%20%20color%3A%20%23BB00BB%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%0A%2F%2A%20Class%20described%20in%20https%3A%2F%2Fbenjeffrey%2Ecom%2Fposts%2Fpandoc%2Dsyntax%2Dhighlighting%2Dcss%0A%20%20%20Colours%20from%20https%3A%2F%2Fgist%2Egithub%2Ecom%2Frobsimmons%2F1172277%20%2A%2F%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Keyword%20%2A%2F%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%2F%2A%20DataType%20%2A%2F%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%2F%2A%20DecVal%20%28decimal%20values%29%20%2A%2F%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20BaseN%20%2A%2F%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Float%20%2A%2F%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Char%20%2A%2F%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20String%20%2A%2F%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%2F%2A%20Comment%20%2A%2F%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%2F%2A%20OtherToken%20%2A%2F%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20AlertToken%20%2A%2F%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Function%20calls%20%2A%2F%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%2F%2A%20ErrorTok%20%2A%2F%0A%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+<div id="header">
+<h1 class="title">Tutorial for WufooR</h1>
+<h4 class="author"><em>dmpe @ github</em></h4>
+<h4 class="date"><em>2015-07-17</em></h4>
+</div>
+
+
+<div id="authentication" class="section level2">
+<h2>Authentication</h2>
+<p>To access data from your surways, you firstly need to store your login name (subdomain) and API Key. This can be done in two ways as described below.</p>
+<p>Initially, this has been written by <a href="https://github.com/sckott">Scott Chamberlain</a>, who wrote it in the NEWS file of his <code>rnoaa</code> <a href="https://github.com/ropensci/rnoaa/blob/master/NEWS.md">package</a>. I have addapted the names of my functions accordingly.</p>
+<p>PS: Don’t use my key, of course.</p>
+<blockquote>
+<p>A new helper function <code>auth_name()/auth_api()</code> looks for one of two stored keys, as an environment variable under the name <code>Wufoo_Name</code>/<code>Wufoo_API</code>, or an option variable under the name <code>Wufoo_Name</code>/<code>Wufoo_API</code>.</p>
+</blockquote>
+<blockquote>
+<p>Environment variables can be set during session like <code>Sys.setenv(VAR = &quot;...&quot;)</code>, or stored long term in your <code>.Renviron</code> file. Option variables can be set during session like <code>options(var = &quot;...&quot;)</code>, or stored long term in your <code>.Rprofile</code> file.</p>
+</blockquote>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(WufooR)
+
+<span class="kw">options</span>(<span class="dt">Wufoo_Name =</span> <span class="st">&quot;johnmalc&quot;</span>, <span class="dt">Wufoo_API =</span> <span class="st">&quot;F1QH-Q64B-BSBI-JASJ&quot;</span>)</code></pre>
+<p>Print information about my name &amp; api key.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">auth_name</span>(<span class="ot">NULL</span>)</code></pre>
+<pre><code>## [1] &quot;johnmalc&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">auth_key</span>(<span class="ot">NULL</span>)</code></pre>
+<pre><code>## [1] &quot;F1QH-Q64B-BSBI-JASJ&quot;</code></pre>
+</div>
+<div id="use-cases" class="section level2">
+<h2>Use Cases</h2>
+<p>Let’s print some information about the user.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t</span>(<span class="kw">user_info</span>())</code></pre>
+<pre><code>##                1                                                 
+## User           &quot;johnmalc&quot;                                        
+## Email          &quot;f789gh@yahoo.com&quot;                                
+## TimeZone       &quot;2.00&quot;                                            
+## Company        &quot;&quot;                                                
+## IsAccountOwner &quot;1&quot;                                               
+## CreateForms    &quot;1&quot;                                               
+## CreateReports  &quot;1&quot;                                               
+## CreateThemes   &quot;1&quot;                                               
+## AdminAccess    &quot;0&quot;                                               
+## Image          &quot;boy_1&quot;                                           
+## ApiKey         &quot;F1QH-Q64B-BSBI-JASJ&quot;                             
+## LinkForms      &quot;https://johnmalc.wufoo.com/api/v3/forms.json&quot;    
+## LinkReports    &quot;https://johnmalc.wufoo.com/api/v3/reports.json&quot;  
+## Hash           &quot;n1asm5y21d1enjq&quot;                                 
+## ImageUrlBig    &quot;https://wufoo.com/images/avatars/big/boy_1.png&quot;  
+## ImageUrlSmall  &quot;https://wufoo.com/images/avatars/small/boy_1.png&quot;
+## HttpsEnabled   &quot;1&quot;</code></pre>
+<p>And now about the forms you have access to.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t</span>(<span class="kw">form_info</span>())</code></pre>
+<pre><code>##                  1                                                                                                  
+## Name             &quot;This form has some very nice name&quot;                                                                
+## Description      &quot;This is my form. Please fill it out. It's awesome!&quot;                                               
+## RedirectMessage  &quot;Great! Thanks for filling out my form!&quot;                                                           
+## Url              &quot;this-form-has-some-very-nice-name&quot;                                                                
+## Email            &quot;&quot;                                                                                                 
+## IsPublic         &quot;1&quot;                                                                                                
+## Language         &quot;english&quot;                                                                                          
+## StartDate        &quot;2000-01-01 12:00:00&quot;                                                                              
+## EndDate          &quot;2030-01-01 12:00:00&quot;                                                                              
+## EntryLimit       &quot;0&quot;                                                                                                
+## DateCreated      &quot;2015-07-04 02:07:34&quot;                                                                              
+## DateUpdated      &quot;2015-07-04 05:28:43&quot;                                                                              
+## Hash             &quot;z5kqx7h1gtvg4g&quot;                                                                                   
+## LinkFields       &quot;https://johnmalc.wufoo.com/api/v3/forms/z5kqx7h1gtvg4g/fields.json?includeTodayCount=false&quot;       
+## LinkEntries      &quot;https://johnmalc.wufoo.com/api/v3/forms/z5kqx7h1gtvg4g/entries.json?includeTodayCount=false&quot;      
+## LinkEntriesCount &quot;https://johnmalc.wufoo.com/api/v3/forms/z5kqx7h1gtvg4g/entries/count.json?includeTodayCount=false&quot;
+## EntryCountToday  &quot;0&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Show responses to the form</span>
+fe_1 &lt;-<span class="st"> </span><span class="kw">form_entries</span>(<span class="dt">formIdentifier =</span> <span class="st">&quot;z5kqx7h1gtvg4g&quot;</span>)
+<span class="kw">t</span>(fe_1)</code></pre>
+<pre><code>##                           1                        
+## Entry Id                  &quot;1&quot;                      
+## First Name                &quot;JOhn&quot;                   
+## Last Name                 &quot;Malc&quot;                   
+## Email                     &quot;asdasfjf@asldjfsdjf.con&quot;
+## Untitled                  &quot;Just testing 1&quot;         
+## Address                   NA                       
+## Address Line 2            NA                       
+## City                      NA                       
+## State / Province / Region NA                       
+## Postal / Zip Code         NA                       
+## Country                   NA                       
+## Amount                    NA                       
+## Time                      NA                       
+## Website                   NA                       
+## Phone Number              &quot;6516566588&quot;             
+## Date Created              &quot;2015-07-04 15:27:54&quot;    
+## Created By                &quot;public&quot;                 
+## DateUpdated               NA                       
+## Updated By                NA                       
+##                           2                               
+## Entry Id                  &quot;2&quot;                             
+## First Name                &quot;Zanic&quot;                         
+## Last Name                 &quot;Mornarnd&quot;                      
+## Email                     &quot;lsjdfnsdjfNkjn@kdfjnsdkfjn.com&quot;
+## Untitled                  &quot;kdjsnfsdjfnsdjnvcjcnqoencqocn &quot;
+## Address                   &quot;sjdfnsdjnf&quot;                    
+## Address Line 2            &quot;skdjnojdvn&quot;                    
+## City                      &quot;Prague&quot;                        
+## State / Province / Region &quot;jfsndkjn&quot;                      
+## Postal / Zip Code         &quot;16565&quot;                         
+## Country                   &quot;Australia&quot;                     
+## Amount                    &quot;5616.22&quot;                       
+## Time                      &quot;12:45:54&quot;                      
+## Website                   &quot;http://www.jdslknsdj.com&quot;      
+## Phone Number              &quot;5554486548&quot;                    
+## Date Created              &quot;2015-07-05 15:12:37&quot;           
+## Created By                &quot;johnmalc&quot;                      
+## DateUpdated               NA                              
+## Updated By                NA</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sapply</span>(fe_1, class)</code></pre>
+<pre><code>##                  Entry Id                First Name 
+##               &quot;character&quot;               &quot;character&quot; 
+##                 Last Name                     Email 
+##               &quot;character&quot;               &quot;character&quot; 
+##                  Untitled                   Address 
+##               &quot;character&quot;               &quot;character&quot; 
+##            Address Line 2                      City 
+##               &quot;character&quot;               &quot;character&quot; 
+## State / Province / Region         Postal / Zip Code 
+##               &quot;character&quot;               &quot;character&quot; 
+##                   Country                    Amount 
+##               &quot;character&quot;               &quot;character&quot; 
+##                      Time                   Website 
+##               &quot;character&quot;               &quot;character&quot; 
+##              Phone Number              Date Created 
+##               &quot;character&quot;               &quot;character&quot; 
+##                Created By               DateUpdated 
+##               &quot;character&quot;               &quot;character&quot; 
+##                Updated By 
+##                 &quot;logical&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># How many responses did you get ?</span>
+<span class="kw">form_entriesCount</span>(<span class="dt">formIdentifier =</span> <span class="st">&quot;z5kqx7h1gtvg4g&quot;</span>)</code></pre>
+<pre><code>## [1] &quot;2&quot;</code></pre>
+<p>Show its fields, with the requested URL (for debug purposes).</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fields_info</span>(<span class="dt">formIdentifier =</span> <span class="st">&quot;z5kqx7h1gtvg4g&quot;</span>, <span class="dt">showRequestURL =</span> <span class="ot">TRUE</span>)</code></pre>
+<pre><code>## The requested URL has been this:  https://johnmalc.wufoo.com/api/v3/forms/z5kqx7h1gtvg4g/fields.json</code></pre>
+<pre><code>##                        Title      Type          ID Instructions IsRequired
+## 11                Created By      text   CreatedBy         &lt;NA&gt;       &lt;NA&gt;
+## 10              Date Created      date DateCreated         &lt;NA&gt;       &lt;NA&gt;
+## 1                   Entry Id      text     EntryId         &lt;NA&gt;       &lt;NA&gt;
+## 2                 First Name shortname      Field1         &lt;NA&gt;          0
+## 6                     Amount     money     Field10         &lt;NA&gt;          0
+## 5                    Address   address     Field11         &lt;NA&gt;          0
+## 15            Address Line 2      &lt;NA&gt;     Field12         &lt;NA&gt;       &lt;NA&gt;
+## 16                      City      &lt;NA&gt;     Field13         &lt;NA&gt;       &lt;NA&gt;
+## 17 State / Province / Region      &lt;NA&gt;     Field14         &lt;NA&gt;       &lt;NA&gt;
+## 18         Postal / Zip Code      &lt;NA&gt;     Field15         &lt;NA&gt;       &lt;NA&gt;
+## 19                   Country      &lt;NA&gt;     Field16         &lt;NA&gt;       &lt;NA&gt;
+## 14                 Last Name      &lt;NA&gt;      Field2         &lt;NA&gt;       &lt;NA&gt;
+## 3                      Email     email      Field3         &lt;NA&gt;          0
+## 4                   Untitled  textarea      Field5         &lt;NA&gt;          0
+## 9               Phone Number     phone      Field6         &lt;NA&gt;          0
+## 8                    Website       url      Field8         &lt;NA&gt;          0
+## 7                       Time      time      Field9         &lt;NA&gt;          0
+## 12              Last Updated      date LastUpdated         &lt;NA&gt;       &lt;NA&gt;
+## 13                Updated By      text   UpdatedBy         &lt;NA&gt;       &lt;NA&gt;
+##    ClassNames DefaultVal Page                     Label
+## 11       &lt;NA&gt;       &lt;NA&gt; &lt;NA&gt;                      &lt;NA&gt;
+## 10       &lt;NA&gt;       &lt;NA&gt; &lt;NA&gt;                      &lt;NA&gt;
+## 1        &lt;NA&gt;       &lt;NA&gt; &lt;NA&gt;                      &lt;NA&gt;
+## 2        &lt;NA&gt;       &lt;NA&gt;    1                     First
+## 6        &lt;NA&gt;       &lt;NA&gt;    1                      &lt;NA&gt;
+## 5        &lt;NA&gt;       &lt;NA&gt;    1            Street Address
+## 15       &lt;NA&gt;       &lt;NA&gt; &lt;NA&gt;            Address Line 2
+## 16       &lt;NA&gt;       &lt;NA&gt; &lt;NA&gt;                      City
+## 17       &lt;NA&gt;       &lt;NA&gt; &lt;NA&gt; State / Province / Region
+## 18       &lt;NA&gt;       &lt;NA&gt; &lt;NA&gt;         Postal / Zip Code
+## 19       &lt;NA&gt;       &lt;NA&gt; &lt;NA&gt;                   Country
+## 14       &lt;NA&gt;       &lt;NA&gt; &lt;NA&gt;                      Last
+## 3        &lt;NA&gt;       &lt;NA&gt;    1                      &lt;NA&gt;
+## 4        &lt;NA&gt;       &lt;NA&gt;    1                      &lt;NA&gt;
+## 9        &lt;NA&gt;       &lt;NA&gt;    1                      &lt;NA&gt;
+## 8        &lt;NA&gt;       &lt;NA&gt;    1                      &lt;NA&gt;
+## 7        &lt;NA&gt;       &lt;NA&gt;    1                      &lt;NA&gt;
+## 12       &lt;NA&gt;       &lt;NA&gt; &lt;NA&gt;                      &lt;NA&gt;
+## 13       &lt;NA&gt;       &lt;NA&gt; &lt;NA&gt;                      &lt;NA&gt;</code></pre>
+<p>Do you have some reports ? If yes, then show me information about them.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t</span>(<span class="kw">reports_info</span>())</code></pre>
+<pre><code>##                  1                                                                              
+## Name             &quot;Untitled Report&quot;                                                              
+## IsPublic         &quot;1&quot;                                                                            
+## Url              &quot;untitled-report&quot;                                                              
+## Description      &quot;This is my report. View it in all its glory!&quot;                                 
+## DateCreated      &quot;2015-07-04 03:31:55&quot;                                                          
+## DateUpdated      &quot;2015-07-10 02:39:43&quot;                                                          
+## Hash             &quot;z5kqx7h1gtvg4g&quot;                                                               
+## LinkFields       &quot;https://johnmalc.wufoo.com/api/v3/reports/z5kqx7h1gtvg4g/fields.json?=&quot;       
+## LinkEntries      &quot;https://johnmalc.wufoo.com/api/v3/reports/z5kqx7h1gtvg4g/entries.json?=&quot;      
+## LinkEntriesCount &quot;https://johnmalc.wufoo.com/api/v3/reports/z5kqx7h1gtvg4g/entries/count.json?=&quot;
+## LinkWidgets      &quot;https://johnmalc.wufoo.com/api/v3/reports/z5kqx7h1gtvg4g/widgets.json?=&quot;</code></pre>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
