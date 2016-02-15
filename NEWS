@@ -2,9 +2,13 @@ For the current development, the user can
 see: https://github.com/dmpe/WufooR
 
 ###
-September 2015 - bring up to date with R releases
-               - attempt to fix Fedoras issue with security certs (NSS non existent; see CRAN mail)
+February 2016  - Update packages
+               - Make documentation more explicit about what is expected
+               - Add 2 new parametrs: domain and debugConnection
 
-July 2015 - Initial CRAN Release.
-          - Fully working release.
+September 2015 - bring up to date with R releases
+               - attempt to fix Fedora's issue with security certs (NSS non existent; see CRAN mail)
+
+July 2015      - Initial CRAN Release.
+               - Fully working release.
           

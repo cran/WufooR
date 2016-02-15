@@ -3,7 +3,9 @@
 #' @inheritParams form_info
 #' @inheritParams user_info
 #' 
-#' @param reportName - the name (not the hash!) of the specific report
+#' @param reportName - the name of your report as displayed in the csv export 
+#' URL (which is in lowercase with hyphens replacing spaces of your report name). Do not use 
+#' the hash value for this argument. The report should be also public.
 #' 
 #' @return Name - This is the friendly name you chose when creating this form.
 #' @return IsPublic - Indicates whether or not the report is accessible through 
@@ -20,16 +22,18 @@
 #' reports_info(reportName = "untitled-report")
 #' 
 #' @export
-reports_info <- function(wufoo_name = auth_name(NULL), reportName = NULL, showRequestURL = FALSE) {
+reports_info <- function(wufoo_name = auth_name(NULL), domain = "wufoo.com", 
+                         reportName = NULL, showRequestURL = FALSE, debugConnection = 0L) {
   
-  reports_url <- paste0("https://", wufoo_name, ".wufoo.com/api/v3/reports.json")
+  reports_url <- paste0("https://", wufoo_name, ".", domain, "/api/v3/reports.json")
   
   query <- list(reportName = reportName)
   
-  executedReportsGetRst <- doRequest(reports_url, query, showURL = showRequestURL)
+  executedReportsGetRst <- doRequest(reports_url, query, showURL = showRequestURL, debugConnection = debugConnection)
   
   return(executedReportsGetRst$Reports)
 }
+
 
 
 

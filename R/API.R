@@ -1,15 +1,19 @@
 #' @title Authentication
 #' 
-#' @description Methods for setting your Wufoo Name & API Key, permanently. For both of them visit your
-#' profile. For API Key go to \code{https://yourName.wufoo.com/api/code/1/}
+#' @description Method for setting your Wufoo Name and API Key. Your Wufoo name is the subdomain 
+#' of your Wufoo URL displayed in "Account" tab. For example, for http://johnmalc.wufoo.com ->
+#' the Wufoo_Name = "johnmalc". This can be also actually the company's name, e.g. \code{http://google.wufoo.com}
 #' 
+#' Your API may be found by selecting "Share" for your Form, then 
+#' "API Information" (or go to \code{https://yourName.wufoo.com/api/code/1/}. 
+#'  
 #' @author The code for these methods has been developed by Scott Chamberlain \url{https://github.com/sckott} for his 
 #' \url{https://github.com/ropensci/rnoaa} package. His copyright!
 #' 
 #' @param x - an empty parameter, e.g. NULL
 #' 
 #' @note Wufoo currently restricts your API usage to 5000 requests per day.
-#' 
+#'  
 #' @examples 
 #' options(Wufoo_Name = "johnmalc", Wufoo_API = "F1QH-Q64B-BSBI-JASJ")
 #' 
@@ -42,6 +46,7 @@ auth_key <- function(x) {
 #' @param apiKey - uses the passed api key of the user
 #' @param queryParameters - parameters that are used for building a URL
 #' @param showURL - for debugging purposes only: it shows what URL has been called
+#' @param debugConnection - same as above 
 #' 
 #' @import httr
 #' @import jsonlite
