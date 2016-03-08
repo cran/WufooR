@@ -21,7 +21,7 @@ sapply(fe_1, class)
 
 ## ------------------------------------------------------------------------
 # How many responses did you get ?
-form_entriesCount(formIdentifier = "z5kqx7h1gtvg4g")
+form_entriesCount(formIdentifier = "z5kqx7h1gtvg4g", domain = "wufoo.eu")
 
 ## ------------------------------------------------------------------------
 fields_info(formIdentifier = "z5kqx7h1gtvg4g", showRequestURL = TRUE)
