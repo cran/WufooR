@@ -45,7 +45,7 @@ The Fields API describes the hierarchy of your data. At the heart of this API is
 listing of FieldId values. Each FieldId corresponds to a value in the Entries API.
 }
 \note{
-This function returns 2 data frames. One containing only default fields, another one containing 
+For developers: This function returns 2 data frames. One containing only default fields, another one containing 
 subfields as described \url{http://help.wufoo.com/articles/en_US/SurveyMonkeyArticleType/The-Fields-API#Fancypants}. 
 "These include name, shortname, checkbox, address, and likert."
 }
@@ -54,4 +54,3 @@ fields_info(formIdentifier = "z5kqx7h1gtvg4g", showRequestURL = TRUE)
 fields_info(formIdentifier = "z5kqx7h1gtvg4g", debugConnection = 1L)
 
 }
-
