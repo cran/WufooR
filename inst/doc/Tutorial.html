@@ -12,7 +12,7 @@
 
 <meta name="author" content="dmpe @ github" />
 
-<meta name="date" content="2017-04-20" />
+<meta name="date" content="2018-03-14" />
 
 <title>Tutorial for WufooR</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Tutorial for WufooR</h1>
 <h4 class="author"><em>dmpe @ github</em></h4>
-<h4 class="date"><em>2017-04-20</em></h4>
+<h4 class="date"><em>2018-03-14</em></h4>
 
 
 
@@ -78,7 +78,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2>Authentication</h2>
 <p>To access data from your surways, you firstly need to store your login name (subdomain) and API Key. This can be done in two ways as described below.</p>
 <p>Initially, this has been written by <a href="https://github.com/sckott">Scott Chamberlain</a>, who wrote it in the NEWS file of his <code>rnoaa</code> <a href="https://github.com/ropensci/rnoaa/blob/master/NEWS.md">package</a>. I have addapted the names of my functions accordingly.</p>
-<p>PS: Don’t use my key, of course.</p>
+<p>PS: Don’t use my key, of course. See <a href="https://wufoo.github.io/docs/" class="uri">https://wufoo.github.io/docs/</a></p>
 <blockquote>
 <p>A new helper function <code>auth_name()/auth_api()</code> looks for one of two stored keys, as an environment variable under the name <code>Wufoo_Name</code>/<code>Wufoo_API</code>, or an option variable under the name <code>Wufoo_Name</code>/<code>Wufoo_API</code>.</p>
 </blockquote>
@@ -87,179 +87,29 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </blockquote>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(WufooR)
 
-<span class="kw">options</span>(<span class="dt">Wufoo_Name =</span> <span class="st">&quot;johnmalc&quot;</span>, <span class="dt">Wufoo_API =</span> <span class="st">&quot;F1QH-Q64B-BSBI-JASJ&quot;</span>)</code></pre></div>
+<span class="kw">options</span>(<span class="dt">Wufoo_Name =</span> <span class="st">&quot;johnmalc&quot;</span>, <span class="dt">Wufoo_API =</span> <span class="st">&quot;put here your api key&quot;</span>)</code></pre></div>
 <p>Print information about my name &amp; api key.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">auth_name</span>(<span class="ot">NULL</span>)</code></pre></div>
-<pre><code>## [1] &quot;johnmalc&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">auth_key</span>(<span class="ot">NULL</span>)</code></pre></div>
-<pre><code>## [1] &quot;F1QH-Q64B-BSBI-JASJ&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">auth_name</span>(<span class="ot">NULL</span>)
+<span class="kw">auth_key</span>(<span class="ot">NULL</span>)</code></pre></div>
 </div>
 <div id="use-cases" class="section level2">
 <h2>Use Cases</h2>
 <p>Let’s print some information about the user.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t</span>(<span class="kw">user_info</span>())</code></pre></div>
-<pre><code>##                1                                                 
-## User           &quot;johnmalc&quot;                                        
-## Email          &quot;f789gh@yahoo.com&quot;                                
-## TimeZone       &quot;2.00&quot;                                            
-## Company        &quot;&quot;                                                
-## IsAccountOwner &quot;1&quot;                                               
-## CreateForms    &quot;1&quot;                                               
-## CreateReports  &quot;1&quot;                                               
-## CreateThemes   &quot;1&quot;                                               
-## AdminAccess    &quot;0&quot;                                               
-## Image          &quot;boy_1&quot;                                           
-## ApiKey         &quot;F1QH-Q64B-BSBI-JASJ&quot;                             
-## LinkForms      &quot;https://johnmalc.wufoo.com/api/v3/forms.json&quot;    
-## LinkReports    &quot;https://johnmalc.wufoo.com/api/v3/reports.json&quot;  
-## Hash           &quot;n1asm5y21d1enjq&quot;                                 
-## ImageUrlBig    &quot;https://wufoo.com/images/avatars/big/boy_1.png&quot;  
-## ImageUrlSmall  &quot;https://wufoo.com/images/avatars/small/boy_1.png&quot;
-## HttpsEnabled   &quot;1&quot;</code></pre>
 <p>And now about the forms you have access to.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t</span>(<span class="kw">form_info</span>())</code></pre></div>
-<pre><code>##                  1                                                                                                  
-## Name             &quot;This form has some very nice name&quot;                                                                
-## Description      &quot;This is my form. Please fill it out. It's awesome!&quot;                                               
-## RedirectMessage  &quot;Great! Thanks for filling out my form!&quot;                                                           
-## Url              &quot;this-form-has-some-very-nice-name&quot;                                                                
-## Email            &quot;&quot;                                                                                                 
-## IsPublic         &quot;1&quot;                                                                                                
-## Language         &quot;english&quot;                                                                                          
-## StartDate        &quot;2000-01-01 12:00:00&quot;                                                                              
-## EndDate          &quot;2030-01-01 12:00:00&quot;                                                                              
-## EntryLimit       &quot;0&quot;                                                                                                
-## DateCreated      &quot;2015-07-04 02:07:34&quot;                                                                              
-## DateUpdated      &quot;2015-07-04 05:28:43&quot;                                                                              
-## Hash             &quot;z5kqx7h1gtvg4g&quot;                                                                                   
-## LinkFields       &quot;https://johnmalc.wufoo.com/api/v3/forms/z5kqx7h1gtvg4g/fields.json?includeTodayCount=false&quot;       
-## LinkEntries      &quot;https://johnmalc.wufoo.com/api/v3/forms/z5kqx7h1gtvg4g/entries.json?includeTodayCount=false&quot;      
-## LinkEntriesCount &quot;https://johnmalc.wufoo.com/api/v3/forms/z5kqx7h1gtvg4g/entries/count.json?includeTodayCount=false&quot;
-## EntryCountToday  &quot;0&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Show responses to the form</span>
-fe_1 &lt;-<span class="st"> </span><span class="kw">form_entries</span>(<span class="dt">formIdentifier =</span> <span class="st">&quot;z5kqx7h1gtvg4g&quot;</span>)
-<span class="kw">t</span>(fe_1)</code></pre></div>
-<pre><code>##                           1                        
-## Entry Id                  &quot;1&quot;                      
-## First Name                &quot;JOhn&quot;                   
-## Last Name                 &quot;Malc&quot;                   
-## Email                     &quot;asdasfjf@asldjfsdjf.con&quot;
-## Untitled                  &quot;Just testing 1&quot;         
-## Address                   NA                       
-## Address Line 2            NA                       
-## City                      NA                       
-## State / Province / Region NA                       
-## Postal / Zip Code         NA                       
-## Country                   NA                       
-## Amount                    NA                       
-## Time                      NA                       
-## Website                   NA                       
-## Phone Number              &quot;6516566588&quot;             
-## Date Created              &quot;2015-07-04 15:27:54&quot;    
-## Created By                &quot;public&quot;                 
-## DateUpdated               NA                       
-## Updated By                NA                       
-##                           2                               
-## Entry Id                  &quot;2&quot;                             
-## First Name                &quot;Zanic&quot;                         
-## Last Name                 &quot;Mornarnd&quot;                      
-## Email                     &quot;lsjdfnsdjfNkjn@kdfjnsdkfjn.com&quot;
-## Untitled                  &quot;kdjsnfsdjfnsdjnvcjcnqoencqocn &quot;
-## Address                   &quot;sjdfnsdjnf&quot;                    
-## Address Line 2            &quot;skdjnojdvn&quot;                    
-## City                      &quot;Prague&quot;                        
-## State / Province / Region &quot;jfsndkjn&quot;                      
-## Postal / Zip Code         &quot;16565&quot;                         
-## Country                   &quot;Australia&quot;                     
-## Amount                    &quot;5616.22&quot;                       
-## Time                      &quot;12:45:54&quot;                      
-## Website                   &quot;http://www.jdslknsdj.com&quot;      
-## Phone Number              &quot;5554486548&quot;                    
-## Date Created              &quot;2015-07-05 15:12:37&quot;           
-## Created By                &quot;johnmalc&quot;                      
-## DateUpdated               NA                              
-## Updated By                NA</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sapply</span>(fe_1, class)</code></pre></div>
-<pre><code>##                  Entry Id                First Name 
-##               &quot;character&quot;               &quot;character&quot; 
-##                 Last Name                     Email 
-##               &quot;character&quot;               &quot;character&quot; 
-##                  Untitled                   Address 
-##               &quot;character&quot;               &quot;character&quot; 
-##            Address Line 2                      City 
-##               &quot;character&quot;               &quot;character&quot; 
-## State / Province / Region         Postal / Zip Code 
-##               &quot;character&quot;               &quot;character&quot; 
-##                   Country                    Amount 
-##               &quot;character&quot;               &quot;character&quot; 
-##                      Time                   Website 
-##               &quot;character&quot;               &quot;character&quot; 
-##              Phone Number              Date Created 
-##               &quot;character&quot;               &quot;character&quot; 
-##                Created By               DateUpdated 
-##               &quot;character&quot;               &quot;character&quot; 
-##                Updated By 
-##                 &quot;logical&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t</span>(<span class="kw">form_info</span>())
+
+<span class="co"># Show responses to the form</span>
+fe_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">form_entries</span>(<span class="dt">formIdentifier =</span> <span class="st">&quot;z5kqx7h1gtvg4g&quot;</span>)
+<span class="kw">t</span>(fe_<span class="dv">1</span>)
+
+<span class="kw">sapply</span>(fe_<span class="dv">1</span>, class)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># How many responses did you get ?</span>
 <span class="kw">form_entriesCount</span>(<span class="dt">formIdentifier =</span> <span class="st">&quot;z5kqx7h1gtvg4g&quot;</span>, <span class="dt">domain =</span> <span class="st">&quot;wufoo.eu&quot;</span>)</code></pre></div>
-<pre><code>## [1] &quot;2&quot;</code></pre>
 <p>Show its fields, with the requested URL (for debug purposes).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fields_info</span>(<span class="dt">formIdentifier =</span> <span class="st">&quot;z5kqx7h1gtvg4g&quot;</span>, <span class="dt">showRequestURL =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>## The requested URL has been this:  https://johnmalc.wufoo.com/api/v3/forms/z5kqx7h1gtvg4g/fields.json</code></pre>
-<pre><code>##                        Title      Type          ID Instructions IsRequired
-## 11                Created By      text   CreatedBy         &lt;NA&gt;       &lt;NA&gt;
-## 10              Date Created      date DateCreated         &lt;NA&gt;       &lt;NA&gt;
-## 1                   Entry Id      text     EntryId         &lt;NA&gt;       &lt;NA&gt;
-## 2                 First Name shortname      Field1         &lt;NA&gt;          0
-## 6                     Amount     money     Field10         &lt;NA&gt;          0
-## 5                    Address   address     Field11         &lt;NA&gt;          0
-## 15            Address Line 2      &lt;NA&gt;     Field12         &lt;NA&gt;       &lt;NA&gt;
-## 16                      City      &lt;NA&gt;     Field13         &lt;NA&gt;       &lt;NA&gt;
-## 17 State / Province / Region      &lt;NA&gt;     Field14         &lt;NA&gt;       &lt;NA&gt;
-## 18         Postal / Zip Code      &lt;NA&gt;     Field15         &lt;NA&gt;       &lt;NA&gt;
-## 19                   Country      &lt;NA&gt;     Field16         &lt;NA&gt;       &lt;NA&gt;
-## 14                 Last Name      &lt;NA&gt;      Field2         &lt;NA&gt;       &lt;NA&gt;
-## 3                      Email     email      Field3         &lt;NA&gt;          0
-## 4                   Untitled  textarea      Field5         &lt;NA&gt;          0
-## 9               Phone Number     phone      Field6         &lt;NA&gt;          0
-## 8                    Website       url      Field8         &lt;NA&gt;          0
-## 7                       Time      time      Field9         &lt;NA&gt;          0
-## 12              Last Updated      date LastUpdated         &lt;NA&gt;       &lt;NA&gt;
-## 13                Updated By      text   UpdatedBy         &lt;NA&gt;       &lt;NA&gt;
-##    ClassNames DefaultVal Page                     Label
-## 11       &lt;NA&gt;       &lt;NA&gt; &lt;NA&gt;                      &lt;NA&gt;
-## 10       &lt;NA&gt;       &lt;NA&gt; &lt;NA&gt;                      &lt;NA&gt;
-## 1        &lt;NA&gt;       &lt;NA&gt; &lt;NA&gt;                      &lt;NA&gt;
-## 2        &lt;NA&gt;       &lt;NA&gt;    1                      &lt;NA&gt;
-## 6        &lt;NA&gt;       &lt;NA&gt;    1                      &lt;NA&gt;
-## 5        &lt;NA&gt;       &lt;NA&gt;    1                      &lt;NA&gt;
-## 15       &lt;NA&gt;       &lt;NA&gt; &lt;NA&gt;            Address Line 2
-## 16       &lt;NA&gt;       &lt;NA&gt; &lt;NA&gt;                      City
-## 17       &lt;NA&gt;       &lt;NA&gt; &lt;NA&gt; State / Province / Region
-## 18       &lt;NA&gt;       &lt;NA&gt; &lt;NA&gt;         Postal / Zip Code
-## 19       &lt;NA&gt;       &lt;NA&gt; &lt;NA&gt;                   Country
-## 14       &lt;NA&gt;       &lt;NA&gt; &lt;NA&gt;                      Last
-## 3        &lt;NA&gt;       &lt;NA&gt;    1                      &lt;NA&gt;
-## 4        &lt;NA&gt;       &lt;NA&gt;    1                      &lt;NA&gt;
-## 9        &lt;NA&gt;       &lt;NA&gt;    1                      &lt;NA&gt;
-## 8        &lt;NA&gt;       &lt;NA&gt;    1                      &lt;NA&gt;
-## 7        &lt;NA&gt;       &lt;NA&gt;    1                      &lt;NA&gt;
-## 12       &lt;NA&gt;       &lt;NA&gt; &lt;NA&gt;                      &lt;NA&gt;
-## 13       &lt;NA&gt;       &lt;NA&gt; &lt;NA&gt;                      &lt;NA&gt;</code></pre>
 <p>Do I have some reports ? If yes, then show me information about them.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t</span>(<span class="kw">reports_info</span>())</code></pre></div>
-<pre><code>##                  1                                                                              
-## Name             &quot;Untitled Report&quot;                                                              
-## IsPublic         &quot;1&quot;                                                                            
-## Url              &quot;untitled-report&quot;                                                              
-## Description      &quot;This is my report. View it in all its glory!&quot;                                 
-## DateCreated      &quot;2015-07-04 03:31:55&quot;                                                          
-## DateUpdated      &quot;2015-07-10 02:39:43&quot;                                                          
-## Hash             &quot;z5kqx7h1gtvg4g&quot;                                                               
-## LinkFields       &quot;https://johnmalc.wufoo.com/api/v3/reports/z5kqx7h1gtvg4g/fields.json?=&quot;       
-## LinkEntries      &quot;https://johnmalc.wufoo.com/api/v3/reports/z5kqx7h1gtvg4g/entries.json?=&quot;      
-## LinkEntriesCount &quot;https://johnmalc.wufoo.com/api/v3/reports/z5kqx7h1gtvg4g/entries/count.json?=&quot;
-## LinkWidgets      &quot;https://johnmalc.wufoo.com/api/v3/reports/z5kqx7h1gtvg4g/widgets.json?=&quot;</code></pre>
 </div>
 
 
@@ -269,7 +119,7 @@ fe_1 &lt;-<span class="st"> </span><span class="kw">form_entries</span>(<span cl
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
