@@ -1,12 +1,20 @@
 [![Build Status](https://travis-ci.org/dmpe/WufooR.svg?branch=master)](https://travis-ci.org/dmpe/WufooR)
-[![Coverage Status](https://coveralls.io/repos/dmpe/WufooR/badge.svg?branch=master&service=github)](https://coveralls.io/github/dmpe/WufooR?branch=master)
+[![codecov](https://codecov.io/gh/dmpe/WufooR/branch/master/graph/badge.svg)](https://codecov.io/gh/dmpe/WufooR)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/WufooR)](https://cran.r-project.org/package=WufooR)
+=======
 
 R package for Wufoo API
 =======
 
-This package doesn't support creating new forms. 
-It can be only used to retrieve information about your form entries. 
+**Note:** This package doesn't support creating new forms. 
+Thus, it can be only used to retrieve information about your existing forms (entries) and reports. This is due to lacking API support for that. 
+
+As of March 2019, it also supports new Wufoo Frondend experience. [BETA](https://help.wufoo.com/articles/en_US/kb/Beta)
+
+## Not implemented
+
+- <https://wufoo.github.io/docs/#submit-entry>
+
 
 ### Installing
 
@@ -21,7 +29,7 @@ library(devtools)
 devtools::install_github("dmpe/wufoor")
 ```
 
-Tested on Ubuntu 18.04 and Windows 10 (64 bit using latest R)
+Tested on Ubuntu 19.04 and Windows 10 (64 bit using latest R)
 
 ### Looking for examples and current implementation status ?
 
