@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <meta name="author" content="dmpe @ github" />
 
-<meta name="date" content="2019-03-24" />
+<meta name="date" content="2020-04-09" />
 
 <title>Tutorial for WufooR</title>
 
@@ -37,7 +37,7 @@ a.sourceLine { text-indent: -1em; padding-left: 1em; }
 pre.numberSource a.sourceLine
   { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+  { content: attr(title);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
     border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
@@ -96,7 +96,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -117,9 +117,6 @@ padding-right: 2em;
 font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 font-size: 14px;
 line-height: 1.35;
-}
-#header {
-text-align: center;
 }
 #TOC {
 clear: both;
@@ -288,7 +285,8 @@ code > span.st { color: #d14; }
 code > span.co { color: #888888; font-style: italic; } 
 code > span.ot { color: #007020; } 
 code > span.al { color: #ff0000; font-weight: bold; } 
-code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
 </style>
 
 
@@ -303,7 +301,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 <h1 class="title toc-ignore">Tutorial for WufooR</h1>
 <h4 class="author">dmpe @ github</h4>
-<h4 class="date">2019-03-24</h4>
+<h4 class="date">2020-04-09</h4>
 
 
 
@@ -318,48 +316,51 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <p>Environment variables can be set during session like <code>Sys.setenv(VAR = &quot;...&quot;)</code>, or stored long term in your <code>.Renviron</code> file. Option variables can be set during session like <code>options(var = &quot;...&quot;)</code>, or stored long term in your <code>.Rprofile</code> file.</p>
 </blockquote>
 <p>Print information about myself &amp; API key.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">auth_name</span>(<span class="ot">NULL</span>)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">auth_key</span>(<span class="ot">NULL</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">auth_name</span>(<span class="ot">NULL</span>)</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">auth_key</span>(<span class="ot">NULL</span>)</a></code></pre></div>
 </div>
 <div id="user-information" class="section level2">
 <h2>User Information</h2>
 <p>Let’s print some information about the user.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">t</span>(<span class="kw">user_info</span>())</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">t</span>(<span class="kw">user_info</span>())</a></code></pre></div>
 <p>And now what about the forms you have access to.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">t</span>(<span class="kw">form_info</span>(<span class="dt">formIdentifier =</span> <span class="st">&quot;z5kqx7h1gtvg4g&quot;</span>, <span class="dt">includeTodayCount=</span><span class="st">&quot;FALSE&quot;</span>))</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="kw">t</span>(<span class="kw">form_info</span>(<span class="dt">includeTodayCount=</span><span class="st">&quot;FALSE&quot;</span>))</a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co"># Show responses to the form</span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7">fe_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">form_entries</span>(<span class="dt">formIdentifier =</span> <span class="st">&quot;z5kqx7h1gtvg4g&quot;</span>)</a>
-<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="kw">t</span>(fe_<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb3-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="kw">sapply</span>(fe_<span class="dv">1</span>, class)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">t</span>(<span class="kw">form_info</span>(<span class="dt">formIdentifier =</span> <span class="st">&quot;z5kqx7h1gtvg4g&quot;</span>, <span class="dt">includeTodayCount=</span><span class="st">&quot;FALSE&quot;</span>))</a>
+<a class="sourceLine" id="cb3-2" title="2"></a>
+<a class="sourceLine" id="cb3-3" title="3"></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="kw">t</span>(<span class="kw">form_info</span>(<span class="dt">includeTodayCount=</span><span class="st">&quot;FALSE&quot;</span>))</a>
+<a class="sourceLine" id="cb3-5" title="5"></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="co"># Show responses to the form</span></a>
+<a class="sourceLine" id="cb3-7" title="7">fe_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">form_entries</span>(<span class="dt">formIdentifier =</span> <span class="st">&quot;z5kqx7h1gtvg4g&quot;</span>)</a>
+<a class="sourceLine" id="cb3-8" title="8"><span class="kw">t</span>(fe_<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb3-9" title="9"></a>
+<a class="sourceLine" id="cb3-10" title="10"><span class="kw">sapply</span>(fe_<span class="dv">1</span>, class)</a></code></pre></div>
 <p>And how many responses did we get sofar ?</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">form_entriesCount</span>(<span class="dt">formIdentifier =</span> <span class="st">&quot;z5kqx7h1gtvg4g&quot;</span>, <span class="dt">domain =</span> <span class="st">&quot;wufoo.eu&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">form_entriesCount</span>(<span class="dt">formIdentifier =</span> <span class="st">&quot;z5kqx7h1gtvg4g&quot;</span>, <span class="dt">domain =</span> <span class="st">&quot;wufoo.eu&quot;</span>)</a></code></pre></div>
 <p>And form comments ?</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">form_comments</span>(<span class="dt">formIdentifier =</span> <span class="st">&quot;z5kqx7h1gtvg4g&quot;</span>, <span class="dt">domain =</span> <span class="st">&quot;wufoo.eu&quot;</span>)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">form_commentsCount</span>(<span class="dt">formIdentifier =</span> <span class="st">&quot;z5kqx7h1gtvg4g&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">form_comments</span>(<span class="dt">formIdentifier =</span> <span class="st">&quot;z5kqx7h1gtvg4g&quot;</span>, <span class="dt">domain =</span> <span class="st">&quot;wufoo.eu&quot;</span>)</a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="kw">form_commentsCount</span>(<span class="dt">formIdentifier =</span> <span class="st">&quot;z5kqx7h1gtvg4g&quot;</span>)</a></code></pre></div>
 <p>Form entries in CSV ?</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">form_entriesFromCSV</span>(<span class="dt">reportName =</span> <span class="st">&quot;untitled-report&quot;</span>, <span class="dt">showRequestURL =</span> F)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">form_entriesFromCSV</span>(<span class="dt">reportName =</span> <span class="st">&quot;untitled-report&quot;</span>, <span class="dt">showRequestURL =</span> F)</a></code></pre></div>
 <p>Show form’s fields, with the requested URL (for debug purposes).</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">fields_info</span>(<span class="dt">formIdentifier =</span> <span class="st">&quot;z5kqx7h1gtvg4g&quot;</span>, <span class="dt">showRequestURL =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">fields_info</span>(<span class="dt">formIdentifier =</span> <span class="st">&quot;z5kqx7h1gtvg4g&quot;</span>, <span class="dt">showRequestURL =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 </div>
 <div id="report-information" class="section level2">
 <h2>Report Information</h2>
 <p>Do I have some reports ? If yes, then show me information about them.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># all reports</span></a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw">t</span>(<span class="kw">reports_info</span>())</a>
-<a class="sourceLine" id="cb8-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co"># only some reports</span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="kw">t</span>(<span class="kw">report_info</span>(<span class="dt">reportName =</span> <span class="st">&quot;untitled-report&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="co"># all reports</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="kw">t</span>(<span class="kw">reports_info</span>())</a>
+<a class="sourceLine" id="cb8-3" title="3"></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="co"># only some reports</span></a>
+<a class="sourceLine" id="cb8-5" title="5"><span class="kw">t</span>(<span class="kw">report_info</span>(<span class="dt">reportName =</span> <span class="st">&quot;untitled-report&quot;</span>))</a></code></pre></div>
 <p>Number of entries in the report and <code>details of the widgets that make up a specific report</code>.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">t</span>(<span class="kw">report_entries</span>(<span class="dt">reportName =</span> <span class="st">&quot;untitled-report&quot;</span>))</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="kw">t</span>(<span class="kw">report_widgets</span>(<span class="dt">formIdentifier =</span> <span class="st">&quot;z5kqx7h1gtvg4g&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">t</span>(<span class="kw">report_entries</span>(<span class="dt">reportName =</span> <span class="st">&quot;untitled-report&quot;</span>))</a>
+<a class="sourceLine" id="cb9-2" title="2"></a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="kw">t</span>(<span class="kw">report_widgets</span>(<span class="dt">formIdentifier =</span> <span class="st">&quot;z5kqx7h1gtvg4g&quot;</span>))</a></code></pre></div>
 </div>
 
+
+
+<!-- code folding -->
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
